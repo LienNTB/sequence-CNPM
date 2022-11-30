@@ -10,7 +10,7 @@
 
 - Sequence 1.5: Xóa nhân viên
 
-## 2. Quản lý giáo viên
+## Use-case 2. Quản lý giáo viên
 
 - Sequence 1.1: giáo viên mới
 
