@@ -1,0 +1,31 @@
+%%# chỉnh sửa thông tin học viên
+
+sequenceDiagram
+    participant Staff
+    participant StaffView
+    participant StaffController
+    participant StaffService
+    participant StaffRepository
+    participant Database
+
+    Staff->>StaffView:  1. Chọn nút "Sửa" học viên cần sửa thông tin
+    
+    StaffView->>StaffController: 2.1 Gửi id học viên
+    StaffController->>StaffService: 2.2 GetUser()
+    StaffService->>StaffRepository: 2.3 GetUserByIdAsync()
+    StaffRepository->>Database: 2.4 executeQuerry()
+    Database-->>StaffRepository: 2.5 return Student with id
+    StaffRepository-->>StaffView: 2.6 return Student Info
+
+    Staff->>StaffView: 3. Nhập thông tin mới cần sửa
+    Staff->>StaffView: 4. Click nút lưu
+    StaffView->>StaffController: 4.1 Gửi yêu cầu chỉnh sửa học viên
+    StaffController->>StaffService: 4.2 UpdateUser()
+    StaffService->>StaffRepository: 4.3 UpdateUserByIdAsync()
+    StaffRepository->>Database: 4.4 executeQuerry()
+
+    
+    Database-->>StaffRepository: 4.5 return result
+    StaffRepository-->>StaffController: 4.6 change success
+    StaffController-->>StaffView: 4.7 render change success
+

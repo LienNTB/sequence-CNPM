@@ -1,0 +1,29 @@
+%%# tạo học viên mới
+
+sequenceDiagram
+    participant Staff
+    participant StaffView
+    participant StaffController
+    participant StaffService
+    participant StaffRepository
+    participant Database
+
+    Staff->>StaffView:  1. Chọn thêm học viên mới
+    StaffView-->>Staff: 2. Yêu cầu nhập dữ liệu
+    Staff->>StaffView: 3. Nhập dữ liệu và nhấp nút tạo
+    
+    StaffView->>StaffController: 4. Gửi dữ liệu 
+    StaffController->>StaffService: 4.1. Gửi dữ liệu
+    StaffService->>StaffService: Kiểm tra dữ liệu
+
+    alt valid
+        StaffService->>StaffRepository: 4.2.1.1 CreateUser()
+        StaffRepository->>Database: 4.2.1.2 executeQuery()
+        Database-->>StaffRepository: 4.2.1.3 return user with id
+        StaffRepository-->>StaffView: 4.2.1.4 return User entity
+        StaffView-->>Staff: 5.1. Tạo tài khoản thành công
+    else invalid
+        StaffService-->>StaffView: 4.2.2.1 throw exception
+        StaffView-->>Staff: 5.2. Thông báo lỗi
+    end
+
