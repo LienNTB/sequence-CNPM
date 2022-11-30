@@ -11,15 +11,15 @@ sequenceDiagram
     TeacherView-->>-Teacher: 2.2. Chuyển đến trang sửa bài kiểm tra
     Teacher->>+TeacherView: 2.3. Sửa nội dung bài kiểm tra
     Teacher->>+TeacherView: 2.4. Nhấn nút "Lưu"
-    TeacherView->>+TeacherTestController: 2.4.1. Gửi id bài kiểm tra
-    TeacherTestController->>TeacherService: 2.4.2. UpdateTest()
+    TeacherView->>+TeacherTestController: 2.5.1. Gửi id bài kiểm tra
+    TeacherTestController->>TeacherService: 2.5.2. UpdateTest()
     alt ServiceValidate()
-        TeacherService->>+TeacherRepository: 2.4.3. UpdateTestByIdAsync()
-        TeacherRepository->>+Database: 2.4.4. executeQuery()
+        TeacherService->>+TeacherRepository: 2.5.3. UpdateTestByIdAsync()
+        TeacherRepository->>+Database: 2.5.4. executeQuery()
 
-        Database->>-TeacherTestController: 2.4.5. return result
-        TeacherTestController->>-TeacherView: 2.4.6.1. cập nhật nội dung bài kiểm tra thành công
+        Database->>-TeacherTestController: 2.5.5. return result
+        TeacherTestController->>-TeacherView: 2.5.6.1. cập nhật nội dung bài kiểm tra thành công
     else invalid
-        TeacherTestController->>TeacherView: 2.4.6.2.throw exception
+        TeacherTestController->>TeacherView: 2.5.6.2.throw exception
     end
 ```

@@ -7,7 +7,7 @@ sequenceDiagram
     participant TeacherRepository
     participant Database
 
-    Teacher->>+TeacherView: 1.1. Ấn nút tạo buổi học mới
+    Teacher->>+TeacherView: 1.1. Ấn nút  buổi học mới
     TeacherView-->>-Teacher: 1.2. Hiện modal yêu cầu nhập thông tin
     Teacher->>+TeacherView: 1.3. Điền thông tin buổi học mới
     Teacher->>+TeacherView: 1.4. Nhấn nút "Tạo buổi học"
@@ -22,5 +22,4 @@ sequenceDiagram
     else invalid
         TeacherLessonController->>TeacherView: throw exception
     end
-
 ```
