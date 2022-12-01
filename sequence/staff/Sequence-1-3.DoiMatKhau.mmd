@@ -1,0 +1,25 @@
+%%# chỉnh sửa mật khẩu học viên
+
+sequenceDiagram
+    participant Staff
+    participant StaffView
+    participant StaffController
+    participant StaffService
+    participant StaffRepository
+    participant Database
+
+    Staff->>StaffView:  1. Chọn nút "Đổi mật khẩu" học viên cần sửa
+    
+    Staff->>StaffView: 2. Nhập mật khẩu mới
+    Staff->>StaffView: 3. Click nút lưu
+    StaffView->>StaffController: 3.1 Gửi yêu cầu chỉnh sửa mật khẩu học viên
+    StaffController->>StaffService: 3.2 updateUserPassword()
+    StaffService->>StaffRepository: 3.3 UpdateUserPasswordByIdAsync()
+    StaffRepository->>Database: 3.4 executeQuerry()
+
+    
+    Database-->>StaffRepository: 3.5 return result
+    StaffRepository-->>StaffController: 3.6 change password success
+    StaffController-->>StaffView: 3.7 render change password success
+    
+
