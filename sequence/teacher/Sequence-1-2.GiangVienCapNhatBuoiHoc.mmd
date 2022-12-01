@@ -1,4 +1,4 @@
-```mermaid
+
 sequenceDiagram
     participant Teacher
     participant TeacherView
@@ -15,11 +15,10 @@ sequenceDiagram
     TeacherLessonController->>TeacherService: 2.5.2. UpdateLesson()
     alt ServiceValidate()
         TeacherService->>+TeacherRepository: 2.5.3. UpdateLessonByIdAsync()
-        TeacherRepository->>+Database: 2.5.5. executeQuery()
+        TeacherRepository->>+Database: 2.5.4. executeQuery()
 
-        Database->>-TeacherLessonController: 2.5.5. return result
-        TeacherLessonController->>-TeacherView: 2.5.6.1. cập nhật nội dung buổi học thành công
+        Database-->>-Teacher: 2.5.5.1 Cập nhật nội dung buổi học thành công
     else invalid
-        TeacherLessonController->>TeacherView: 2.5.6.2.throw exception
+        Database-->>-Teacher: 2.5.5.2.throw exception
     end
-```
+
