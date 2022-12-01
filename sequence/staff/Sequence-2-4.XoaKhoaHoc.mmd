@@ -1,4 +1,4 @@
-%%# Xoá học viên
+%%# Xoá khoá học
 
 sequenceDiagram
     participant Staff
@@ -8,12 +8,12 @@ sequenceDiagram
     participant StaffRepository
     participant Database
 
-    Staff->>StaffView:  1. Chọn nút "Xoá" học viên
-    Staff->>StaffView:  2. Xác nhận "Xoá" học viên
+    Staff->>StaffView:  1. Chọn nút "Xoá" khoá học
+    Staff->>StaffView:  2. Xác nhận "Xoá" khoá học
     
-    StaffView->>StaffController: 3.1 Gửi yêu cầu xoá học viên
-    StaffController->>StaffService: 3.2 deleteUserById()
-    StaffService->>StaffRepository: 3.3 DeleteUserByIdAsync()
+    StaffView->>StaffController: 3.1 Gửi yêu cầu xoá khoá học
+    StaffController->>StaffService: 3.2 deleteCourseById()
+    StaffService->>StaffRepository: 3.3 DeleteCourseByIdAsync()
     StaffRepository->>Database: 3.4 executeQuerry()
     Database-->>StaffRepository: 3.5 return result
     StaffRepository-->>StaffController: 3.6 delete success
