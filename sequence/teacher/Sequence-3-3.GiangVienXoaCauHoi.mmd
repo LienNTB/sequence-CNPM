@@ -1,4 +1,4 @@
-```mermaid
+
 sequenceDiagram
     participant Teacher
     participant TeacherView
@@ -16,9 +16,8 @@ sequenceDiagram
         TeacherService->>+TeacherRepository: 3.4.3. DeleteQuestionByIdAsync()
         TeacherRepository->>+Database: 3.4.4. executeQuery()
 
-        Database->>-TeacherQuestionController: 3.4.5. return result
-        TeacherQuestionController->>-TeacherView: 3.4.6.1. Xóa câu hỏi thành công
+        Database-->>-Teacher: 3.4.5.1. Xóa câu hỏi thành công
     else invalid
-        TeacherQuestionController->>TeacherView: 3.4.6.2.throw exception
+        Database-->>Teacher: 3.4.5.2. Throw exception
     end
-```
+

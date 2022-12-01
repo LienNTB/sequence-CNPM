@@ -1,4 +1,4 @@
-```mermaid
+
 sequenceDiagram
     participant Teacher
     participant TeacherView
@@ -17,9 +17,8 @@ sequenceDiagram
         TeacherService->>+TeacherRepository: 1.5.3. CreateTestAsync()
         TeacherRepository->>+Database: 1.5.4. executeQuery()
 
-        Database->>-TeacherTestController: 1.5.5. return Test entity
-        TeacherTestController->>-TeacherView: 1.5.6. tạo bài kiểm tra thành công
+        Database-->>-Teacher: 1.5.5.1. Tạo bài kiểm tra thành công
     else invalid
-        TeacherTestController->>TeacherView: throw exception
+        Database-->>Teacher: 1.5.5.2. Throw exception
     end
-```
+
