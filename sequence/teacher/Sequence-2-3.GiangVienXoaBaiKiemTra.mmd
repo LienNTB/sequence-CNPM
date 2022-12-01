@@ -1,4 +1,4 @@
-```mermaid
+
 sequenceDiagram
     participant Teacher
     participant TeacherView
@@ -16,9 +16,8 @@ sequenceDiagram
         TeacherService->>+TeacherRepository: 3.4.3. DeleteTestByIdAsync()
         TeacherRepository->>+Database: 3.4.4. executeQuery()
 
-        Database->>-TeacherTestController: 3.4.5. return result
-        TeacherTestController->>-TeacherView: 3.4.6.1. xóa bài kiểm tra thành công
+        Database-->>-Teacher: 3.4.5.1. xóa bài kiểm tra thành công
     else invalid
-        TeacherTestController->>TeacherView: 3.4.6.2.throw exception
+        Database-->>Teacher: 3.4.5.2.throw exception
     end
-```
+
