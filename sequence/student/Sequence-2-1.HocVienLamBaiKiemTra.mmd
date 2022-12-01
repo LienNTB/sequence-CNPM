@@ -1,0 +1,55 @@
+sequenceDiagram
+    participant Student
+    participant StudentView
+    participant StudentController
+    participant StudentService
+    participant StudentRepository
+    participant Database
+
+    Student->>StudentView: 1.Chọn lớp học
+    StudentView->>StudentController: 2.1. Gửi id lớp học
+    StudentController->>StudentService: 2.2. Gửi id lớp học
+    StudentService->>StudentRepository: 2.3. GetLessonByClassroomId()
+    StudentRepository->>Database: 2.4. executeQuery()
+
+    Database-->>StudentView: 2.5. Render list lessons by classroom
+    
+    Student->>StudentView: 3. Click "Làm kiểm tra"
+    StudentView->>StudentController: 4.1. Gửi id lesson
+    StudentController->>StudentService: 4.2. Gửi id lesson
+    StudentService->>StudentRepository: 4.3. GetTestByLessonId()
+    StudentRepository->>Database: 4.4. executeQuery()
+
+    Database-->>StudentView: 4.5. Render list tests by lesson
+
+    Student->>StudentView: 5. Click "Bắt đầu làm bài"
+    StudentView->>StudentController: 6.1. Gửi StudentId và TestId
+    StudentController->>StudentService: 6.2. Gửi StudentId và TestId
+    StudentService->>StudentService: 6.3. validate()
+    
+    alt valid
+        StudentService->>StudentRepository: 6.4.1.1 GetStudentTestByStudentIdAndTestId
+        StudentRepository->>Database: 6.4.1.2 executeQuery()
+        Database-->>StudentView: 6.4.1.3 Render test
+    
+
+        Student->>StudentView: 7. Click chọn đáp án
+        StudentView->>StudentController: 8.1. Gửi đáp án
+        StudentController->>StudentService: 8.2. Gửi đáp án
+        StudentService->>StudentRepository: 8.3. SaveAnswer
+        StudentRepository->>Database: 8.4. executeQuery()
+
+        Student->>StudentView: 9.1. Click "Nộp bài"
+        StudentView->>StudentController: 9.2. Gửi studentTestId
+        StudentController->>StudentService: 9.3. Gửi studentTestId
+        StudentService->>StudentRepository: 9.4. SetSubmitIsTrue()
+        StudentRepository->>Database: 9.5. executeQuery()
+        Database-->>Student: 9.6. Thống báo nộp bài thành công
+    else invalid
+        StudentService-->>Student:6.4.2. Thông báo không trong thời gian làm bài hoặc hết số lần làm bài  
+    end
+
+    
+
+
+
