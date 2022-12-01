@@ -1,0 +1,31 @@
+
+sequenceDiagram
+    participant Admin
+    participant AdminView
+    participant AdminController
+    participant UserService
+    participant UserRepository
+    participant Database
+
+    Admin->>AdminView: 1. Chọn tạo giáo viên mới
+    AdminView-->>Admin: 2. Yêu cầu nhập dữ liệu
+    Admin->>AdminView: 3. Nhập dữ liệu và nhấp nút tạo
+    
+    AdminView->>AdminController: 4. Gửi dữ liệu
+    AdminController->>UserService: 5. Gửi dữ liệu
+    UserService->>UserService: 6. Kiểm tra dữ liệu
+
+    alt valid
+        UserService->>UserRepository: 7.1.1. CreateUser()
+        UserRepository->>Database: 7.1.2. executeQuery()
+        
+        Database-->>UserRepository: 7.1.3. return user with id
+        UserRepository-->>UserService: 7.1.4. return User entity
+        UserService-->>AdminController: 7.1.5. return User entity
+        AdminController-->>AdminView: 7.1.6. return User entity
+        AdminView-->>Admin: 7.1.7. Thông báo tạo giáo viên thành công
+    else invalid
+        UserService-->>AdminController: 7.2.1. throw exception
+        AdminController-->>AdminView: 7.2.2. throw exception
+        AdminView-->>Admin: 7.2.3. Thông báo lỗi
+    end
