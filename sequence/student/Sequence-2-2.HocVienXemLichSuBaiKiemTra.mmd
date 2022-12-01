@@ -1,0 +1,35 @@
+sequenceDiagram
+    participant Student
+    participant StudentView
+    participant StudentController
+    participant StudentService
+    participant StudentRepository
+    participant Database
+
+    Student->>StudentView: 1.Chọn lớp học
+    StudentView->>StudentController: 2.1. Gửi id lớp học
+    StudentController->>StudentService: 2.2. Gửi id lớp học
+    StudentService->>StudentRepository: 2.3. GetLessonByClassroomId()
+    StudentRepository->>Database: 2.4. executeQuery()
+
+    Database-->>StudentView: 2.5. Render list lessons by classroom
+    
+    Student->>StudentView: 3. Click "Xem lịch sử"
+    StudentView->>StudentController: 4.1. Gửi id lesson
+    StudentController->>StudentService: 4.2. Gửi id lesson
+    StudentService->>StudentRepository: 4.3. GetListStudentTestResult()
+    StudentRepository->>Database: 4.4. executeQuery()
+
+    Database-->>StudentView: 4.5. Render list studentTestResult
+
+    Student->>StudentView: 4. Click "Xem lại"
+    StudentView->>StudentController: 5.1. Gửi studentTestResultId
+    StudentController->>StudentService: 5.2. Gửi studentTestResultId
+    StudentService->>StudentRepository: 5.3. GetStudentTestResult()
+    StudentRepository->>Database: 5.4. executeQuery()
+
+    Database-->>StudentView: 5.5. Render  studentTestResult
+    
+
+
+
