@@ -1,0 +1,29 @@
+
+sequenceDiagram
+    participant Staff
+    participant StaffView
+    participant StaffController
+    participant StaffService
+    participant StaffRepository
+    participant Database
+
+    Staff->>StaffView:  1. Chọn xem bài giảng cần duyệt
+    StaffView->>StaffController: 2.1. Gửi id bài giảng
+    StaffController->>StaffService: 2.2. Lấy dữ liệu bài giảng
+    StaffService->>StaffRepository: 2.3. Lấy dữ liệu bài giảng 
+    StaffRepository->>Database: 2.4. excuteQuery()
+    Database -->> StaffRepository: 2.5. return Lecture with id
+    StaffRepository -->> StaffView: 2.6 return Lecture info
+    Staff->>StaffView: 3. Chọn duyệt/không duyệt và ấn nút Lưu
+    StaffView->>StaffView: Check dữ liệu ()
+    alt valid
+        StaffView->>StaffController: 4.1.1 Gửi yêu cầu 
+        StaffController->>StaffService: 4.1.2 Gửi yêu cầu
+        StaffService->>StaffRepository: 4.1.3. Gửi yêu cầu 
+        StaffRepository-->Database: 4.1.3. excuteQuery()
+        Database->>StaffView: 4.1.4 return result
+        
+    else invalid
+        StaffView-->>Staff: 4.2. Thông báo thiếu dữ liệu
+    end
+
