@@ -1,0 +1,24 @@
+```mermaid
+sequenceDiagram
+    participant Teacher
+    participant TeacherView
+    participant TeacherQuestionController
+    participant TeacherService
+    participant TeacherRepository
+    participant Database
+
+    Teacher->>+TeacherView: 3.1. Ấn nút xóa
+    TeacherView-->>-Teacher: 3.2. Hiện thông báo xác nhận xóa
+    Teacher->>+TeacherView: 3.3. Nhấn nút "Xóa"
+    TeacherView->>+TeacherQuestionController: 3.4.1. Gửi Id câu hỏi
+    TeacherQuestionController->>TeacherService: 3.4.2. DeleteQuestion()
+    alt ServiceValidate()
+        TeacherService->>+TeacherRepository: 3.4.3. DeleteQuestionByIdAsync()
+        TeacherRepository->>+Database: 3.4.4. executeQuery()
+
+        Database->>-TeacherQuestionController: 3.4.5. return result
+        TeacherQuestionController->>-TeacherView: 3.4.6.1. Xóa câu hỏi thành công
+    else invalid
+        TeacherQuestionController->>TeacherView: 3.4.6.2.throw exception
+    end
+```
