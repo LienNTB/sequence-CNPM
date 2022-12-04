@@ -1,4 +1,4 @@
-%%# chỉnh sửa thông tin học viên
+%%# chỉnh sửa khoá học
 
 sequenceDiagram
     participant Staff
@@ -8,13 +8,13 @@ sequenceDiagram
     participant StaffRepository
     participant Database
 
-    Staff->>StaffView:  1. Chọn nút "Sửa" học viên cần sửa thông tin
+    Staff->>StaffView:  1. Chọn nút "Sửa" khoá học cần sửa thông tin
 
     Staff->>StaffView: 2. Nhập thông tin mới cần sửa
     Staff->>StaffView: 3. Click nút lưu
-    StaffView->>StaffController: 3.1 Gửi yêu cầu chỉnh sửa học viên
-    StaffController->>StaffService: 3.2 UpdateUser()
-    StaffService->>StaffRepository: 3.3 UpdateUserByIdAsync()
+    StaffView->>StaffController: 3.1 Gửi yêu cầu chỉnh sửa khoá học
+    StaffController->>StaffService: 3.2 updateCourse()
+    StaffService->>StaffRepository: 3.3 UpdateCourserByIdAsync()
     StaffRepository->>Database: 3.4 executeQuerry()
 
     
