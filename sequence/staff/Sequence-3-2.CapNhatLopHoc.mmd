@@ -1,0 +1,32 @@
+
+sequenceDiagram
+    participant Staff
+    participant StaffView
+    participant StaffController
+    participant StaffService
+    participant StaffRepository
+    participant Database
+
+    Staff->>StaffView:  1. Chọn lớp cần cập nhật
+    StaffView->>StaffController: 2.1. Gửi id lớp học
+    StaffController->>StaffService: 2.2. Lấy dữ liệu lớp học
+    StaffService->>StaffRepository: 2.3. Lấy dữ liệu lớp học
+    StaffRepository->>Database:2.4. excuteQuery()
+    Database -->> StaffRepository: 2.5. return Classroom with id
+    StaffRepository -->> StaffView: 2.6 return Classroom info
+    Staff->>StaffView: 3. Nhập dữ liệu và nhấp nút cập nhật
+    StaffView->>StaffController: 4.1. Gửi dữ liệu
+    StaffController->>StaffService: 4.2. Gửi dữ liệu
+    StaffService->>StaffService: Check_data()
+
+    alt valid
+        StaffService->>StaffRepository: 4.2.1.1 UpdateClassroom()
+        StaffRepository->>Database: 4.2.1.2 executeQuery()
+        Database-->>StaffView:: 4.2.1.3 return result
+        StaffView-->>Staff: 5.1. Chỉnh sửa thành công 
+    else invalid
+        StaffService-->>StaffController: 4.2.2.1 throw exception
+        StaffController-->>StaffView: 4.2.2.2 throw exception
+        StaffView-->>Staff: 5.2. Thông báo lỗi
+    end
+
