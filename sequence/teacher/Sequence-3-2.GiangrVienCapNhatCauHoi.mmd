@@ -7,17 +7,17 @@ sequenceDiagram
     participant TeacherRepository
     participant Database
 
-    Teacher->>+TeacherView: 2.1. Ấn nút sửa câu hỏi
-    TeacherView-->>-Teacher: 2.2. Chuyển đến trang sửa câu hỏi
-    Teacher->>+TeacherView: 2.3. Sửa nội dung câu hỏi
-    Teacher->>+TeacherView: 2.4. Nhấn nút "Lưu"
-    TeacherView->>+TeacherQuestionController: 2.5.1. Gửi id câu hỏi
+    Teacher->>TeacherView: 2.1. Ấn nút sửa câu hỏi
+    TeacherView-->>Teacher: 2.2. Chuyển đến trang sửa câu hỏi
+    Teacher->>TeacherView: 2.3. Sửa nội dung câu hỏi
+    Teacher->>TeacherView: 2.4. Nhấn nút "Lưu"
+    TeacherView->>TeacherQuestionController: 2.5.1. Gửi id câu hỏi
     TeacherQuestionController->>TeacherService: 2.5.2. UpdateQuestion()
     alt ServiceValidate()
-        TeacherService->>+TeacherRepository: 2.5.3. UpdateQuestionByIdAsync()
-        TeacherRepository->>+Database: 2.5.4. executeQuery()
+        TeacherService->>TeacherRepository: 2.5.3. UpdateQuestionByIdAsync()
+        TeacherRepository->>Database: 2.5.4. executeQuery()
 
-        Database-->>-Teacher: 2.5.5.1. Cập nhật nội dung câu hỏi thành công
+        Database-->>Teacher: 2.5.5.1. Cập nhật nội dung câu hỏi thành công
     else invalid
          Database-->>Teacher: 2.5.5.1. Throw exception
     end
