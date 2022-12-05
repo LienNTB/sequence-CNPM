@@ -1,4 +1,3 @@
-
 sequenceDiagram
     participant Teacher
     participant TeacherView
@@ -19,6 +18,5 @@ sequenceDiagram
 
         Database-->>-Teacher: 2.5.5.1 Cập nhật nội dung buổi học thành công
     else invalid
-        Database-->>-Teacher: 2.5.5.2.throw exception
+        Database-->>Teacher: 2.5.5.2.throw exception
     end
-
