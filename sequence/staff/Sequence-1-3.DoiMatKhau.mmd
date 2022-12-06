@@ -8,18 +8,17 @@ sequenceDiagram
     participant StaffRepository
     participant Database
 
-    Staff->>StaffView:  1. Chọn nút "Đổi mật khẩu" học viên cần sửa
+    Staff->>StaffView: 1. Chọn nút "Đổi mật khẩu" học viên cần sửa
     
     Staff->>StaffView: 2. Nhập mật khẩu mới
     Staff->>StaffView: 3. Click nút lưu
-    StaffView->>StaffController: 3.1 Gửi yêu cầu chỉnh sửa mật khẩu học viên
-    StaffController->>StaffService: 3.2 updateUserPassword()
-    StaffService->>StaffRepository: 3.3 UpdateUserPasswordByIdAsync()
-    StaffRepository->>Database: 3.4 executeQuerry()
+    StaffView->>StaffController: 4.1. Gửi yêu cầu chỉnh sửa mật khẩu học viên
+    StaffController->>StaffService: 4.2. updateUserPassword()
+    StaffService->>StaffRepository: 4.3. UpdateUserPasswordByIdAsync()
+    StaffRepository->>Database: 4.4. executeQuerry()
 
     
-    Database-->>StaffRepository: 3.5 return result
-    StaffRepository-->>StaffController: 3.6 change password success
-    StaffController-->>StaffView: 3.7 render change password success
+    Database-->>StaffRepository: 4.5. return result
+    StaffRepository-->>StaffController: 4.6. change password success
+    StaffController-->>StaffView: 4.7. render change password success
     
-

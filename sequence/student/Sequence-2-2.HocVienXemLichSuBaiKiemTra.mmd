@@ -6,7 +6,7 @@ sequenceDiagram
     participant StudentRepository
     participant Database
 
-    Student->>StudentView: 1.Chọn lớp học
+    Student->>StudentView: 1. Chọn lớp học
     StudentView->>StudentController: 2.1. Gửi id lớp học
     StudentController->>StudentService: 2.2. Gửi id lớp học
     StudentService->>StudentRepository: 2.3. GetLessonByClassroomId()
@@ -42,6 +42,5 @@ sequenceDiagram
 
 
     
-
 
 

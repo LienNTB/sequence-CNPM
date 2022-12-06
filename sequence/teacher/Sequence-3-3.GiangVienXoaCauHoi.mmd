@@ -7,16 +7,16 @@ sequenceDiagram
     participant TeacherRepository
     participant Database
 
-    Teacher->>+TeacherView: 3.1. Ấn nút xóa
-    TeacherView-->>-Teacher: 3.2. Hiện thông báo xác nhận xóa
-    Teacher->>+TeacherView: 3.3. Nhấn nút "Xóa"
-    TeacherView->>+TeacherQuestionController: 3.4.1. Gửi Id câu hỏi
+    Teacher->>TeacherView: 3.1. Ấn nút xóa
+    TeacherView-->>Teacher: 3.2. Hiện thông báo xác nhận xóa
+    Teacher->>TeacherView: 3.3. Nhấn nút "Xóa"
+    TeacherView->>TeacherQuestionController: 3.4.1. Gửi Id câu hỏi
     TeacherQuestionController->>TeacherService: 3.4.2. DeleteQuestion()
     alt ServiceValidate()
-        TeacherService->>+TeacherRepository: 3.4.3. DeleteQuestionByIdAsync()
-        TeacherRepository->>+Database: 3.4.4. executeQuery()
+        TeacherService->>TeacherRepository: 3.4.3. DeleteQuestionByIdAsync()
+        TeacherRepository->>Database: 3.4.4. executeQuery()
 
-        Database-->>-Teacher: 3.4.5.1. Xóa câu hỏi thành công
+        Database-->>Teacher: 3.4.5.1. Xóa câu hỏi thành công
     else invalid
         Database-->>Teacher: 3.4.5.2. Throw exception
     end

@@ -7,18 +7,18 @@ sequenceDiagram
     participant TeacherRepository
     participant Database
 
-    Teacher->>+TeacherView: 1.1. Chọn thêm buổi học mới
-    TeacherView-->>-Teacher: 1.2. Yêu cầu nhập thông tin
-    Teacher->>+TeacherView: 1.3. Điền thông tin buổi học mới
-    Teacher->>+TeacherView: 1.4. Nhấn nút "Tạo buổi học"
-    TeacherView->>+TeacherLessonController: 1.5.1. Gửi thông tin buổi học
-    TeacherLessonController->>TeacherService: 1.5.2. CreateLesson()
+    Teacher->>TeacherView: 1. Chọn thêm buổi học mới
+    TeacherView-->>Teacher: 2. Yêu cầu nhập thông tin
+    Teacher->>TeacherView: 3. Điền thông tin buổi học mới
+    Teacher->>TeacherView: 4. Nhấn nút "Tạo buổi học"
+    TeacherView->>TeacherLessonController: 5. Gửi thông tin buổi học
+    TeacherLessonController->>TeacherService: 5.2. CreateLesson()
     alt valid
-        TeacherService->>+TeacherRepository: 1.5.3. CreateLessonAsync()
-        TeacherRepository->>+Database: 1.5.4. executeQuery()
+        TeacherService->>TeacherRepository: 5.3. CreateLessonAsync()
+        TeacherRepository->>Database: 5.4. executeQuery()
 
-        Database-->>-Teacher: 1.5.5.1. Thông báo tạo buổi học thành công
+        Database-->>Teacher: 5.5.1 Thông báo tạo buổi học thành công
     else invalid
-        Database-->>Teacher: 1.5.5.2 Thông báo lỗi
+        Database-->>Teacher: 5.5.2 Thông báo lỗi
     end
 

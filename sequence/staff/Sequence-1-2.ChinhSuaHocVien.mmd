@@ -8,18 +8,17 @@ sequenceDiagram
     participant StaffRepository
     participant Database
 
-    Staff->>StaffView:  1. Chọn nút "Sửa" học viên cần sửa thông tin
+    Staff->>StaffView: 1. Chọn nút "Sửa" học viên cần sửa thông tin
 
     Staff->>StaffView: 2. Nhập thông tin mới cần sửa
     Staff->>StaffView: 3. Click nút lưu
-    StaffView->>StaffController: 3.1 Gửi yêu cầu chỉnh sửa học viên
-    StaffController->>StaffService: 3.2 UpdateUser()
-    StaffService->>StaffRepository: 3.3 UpdateUserByIdAsync()
-    StaffRepository->>Database: 3.4 executeQuerry()
+    StaffView->>StaffController: 4.1. Gửi yêu cầu chỉnh sửa học viên
+    StaffController->>StaffService: 4.2. UpdateUser()
+    StaffService->>StaffRepository: 4.3. UpdateUserByIdAsync()
+    StaffRepository->>Database: 4.4. executeQuerry()
 
     
-    Database-->>StaffRepository: 3.5 return result
-    StaffRepository-->>StaffController: 3.6 change success
-    StaffController-->>StaffView: 3.7 render change success
+    Database-->>StaffRepository: 4.5. return result
+    StaffRepository-->>StaffController: 4.6. change success
+    StaffController-->>StaffView: 4.7. render change success
     
-

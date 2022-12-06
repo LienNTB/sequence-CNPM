@@ -1,0 +1,21 @@
+sequenceDiagram
+    participant Teacher
+    participant TeacherView
+    participant TeacherTestController
+    participant TeacherService
+    participant TeacherRepository
+    participant Database
+
+    Teacher->>TeacherView: 3.1. Ấn nút nhập bài kiểm tra
+    TeacherView-->>Teacher: 3.2. Hiện ra dialog chọn file
+    Teacher->>TeacherView: 3.3. Nhấn OK
+    TeacherView->>TeacherTestController: 3.4.1. Gửi file bài kiểm tra kèm testId
+    TeacherTestController->>TeacherService: 3.4.2. ImportTestService()
+    alt ServiceValidate()
+        TeacherService->>TeacherRepository: 3.4.3. ImportTestRepository()
+        TeacherRepository->>Database: 3.4.4. executeQuery()
+
+        Database-->>Teacher: 3.4.5.1. nhập vài kiểm tra thành công
+    else invalid
+        Database-->>Teacher: 3.4.5.2.throw exception
+    end

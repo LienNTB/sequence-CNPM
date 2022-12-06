@@ -1,0 +1,20 @@
+
+sequenceDiagram
+    participant Staff
+    participant StaffView
+    participant StaffController
+    participant StaffService
+    participant StaffRepository
+    participant Database
+
+    Staff->>StaffView:  1. Chọn lớp cần xóa
+    StaffView-->>Staff: 2. Xác nhận xóa lớp học
+    StaffView-->>StaffView: 3. Ấn nút xóa
+    StaffView->>StaffController: 4.1. Gửi id lớp học
+    StaffController->>StaffService: 4.2. Gửi id lớp học
+    StaffService->>StaffRepository: 4.3 DeleteClassroomByID(id)
+    StaffRepository->>Database: 4.4 executeQuery()
+    Database-->>StaffViews:: 4.5 return result
+
+
+
